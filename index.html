@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Relatos de piedra y almas</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Spectral:wght@400;600&display=swap">
+<style>
+:root{--bg:#ece2cb;--ink:#17110f;--wine:#6b1d2e;--wine2:#8e2a40;--card:#f6efdd;--line:#c9b992;--mut:#5a4a41;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#120d0c;--ink:#eadfc6;--wine:#a63249;--wine2:#c44a62;--card:#1d1513;--line:#4a3328;--mut:#b5a58a}}
+:root[data-theme="dark"]{--bg:#120d0c;--ink:#eadfc6;--wine:#a63249;--wine2:#c44a62;--card:#1d1513;--line:#4a3328;--mut:#b5a58a}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Spectral,Georgia,serif;font-size:16px;line-height:1.5}
+body{max-width:640px;margin:0 auto;padding:0 12px 28px}
+h1,h2{font-family:"Cormorant Garamond",Georgia,serif;margin:0;line-height:1.1}
+header{padding:18px 4px 10px;border-bottom:1px solid var(--line)}
+header h1{font-size:30px;color:var(--wine);font-weight:700}
+header p{margin:4px 0 0;color:var(--mut);font-size:14px}
+.prog{margin:12px 0 8px}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--wine);transition:width .4s}
+.prog small{display:flex;justify-content:space-between;color:var(--mut);font-size:13px;margin-top:4px}
+.mapbox{position:relative;border:1px solid var(--line);background:#d9cfb6;border-radius:4px;overflow:hidden}
+svg{display:block;width:100%;height:auto;aspect-ratio:1000/783;touch-action:none;user-select:none}
+.zoom{position:absolute;right:8px;top:8px;display:flex;flex-direction:column;gap:6px}
+.zoom button{width:38px;height:38px;border-radius:50%;border:1px solid var(--wine);background:var(--card);color:var(--wine);font-size:20px;font-weight:600}
+.legend{display:flex;gap:14px;font-size:13px;color:var(--mut);margin:6px 2px;flex-wrap:wrap}
+.legend span::before{content:"";display:inline-block;width:26px;border-top:3px solid var(--wine);vertical-align:middle;margin-right:6px}
+.legend .d::before{border-top-style:dashed}.legend .r::before{border-top:3px dotted var(--ink)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:16px;margin-top:10px}
+.card h2{font-size:26px;color:var(--wine)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.chip{border:1px solid var(--wine);color:var(--wine);border-radius:99px;padding:2px 10px;font-size:13px}
+.pend{border-color:var(--mut);color:var(--mut);border-style:dashed}
+.photo{aspect-ratio:4/3;border:1px dashed var(--line);display:grid;place-items:center;text-align:center;color:var(--mut);font-size:14px;margin:10px 0;background:rgba(107,29,46,.06);overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover}
+audio{width:100%;margin-top:6px}
+.nav{display:flex;gap:10px;margin-top:14px}
+button.b{flex:1;padding:12px;font:600 16px Spectral,serif;border:1px solid var(--wine);background:var(--wine);color:#f6efdd;border-radius:3px}
+button.b.o{background:transparent;color:var(--wine)}
+button.b:disabled{opacity:.35}
+label.f{display:inline-block;font-size:13px;color:var(--wine);text-decoration:underline;margin-top:6px}
+input[type=file]{display:none}
+details{border-top:1px solid var(--line);margin-top:12px;padding-top:8px}
+summary{font:700 20px "Cormorant Garamond",serif;color:var(--wine);cursor:pointer}
+li{margin:6px 0}
+#qr{background:#fff;padding:10px;display:inline-block;margin-top:8px}
+.note{font-size:13px;color:var(--mut)}
+:focus-visible{outline:2px solid var(--wine2);outline-offset:2px}
+</style></head><body>
+<header><h1>Relatos de piedra y almas</h1><p>Entre la historia y el mito · Cementerio General, Santiago</p></header>
+
+<div class="prog"><div class="bar"><i id="pb"></i></div><small><span id="pt"></span><span id="pm"></span></small></div>
+
+<div class="mapbox">
+<svg id="map" viewBox="0 0 1000 783" role="img" aria-label="Plano del Cementerio General con los cinco hitos">
+<defs><marker id="ar" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8e2a40"/></marker><marker id="ar2" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17110f"/></marker></defs>
+<rect width="1000" height="783" fill="#d9cfb6"/>
+<image id="mi" x="0" y="0" width="1000" height="783" preserveAspectRatio="none"/>
+<g id="ph"><text x="500" y="350" text-anchor="middle" font-size="30" fill="#6b1d2e" font-family="Spectral,serif">Cargando plano…</text><text x="500" y="392" text-anchor="middle" font-size="22" fill="#5a4a41" font-family="Spectral,serif">Usa «Cargar plano» debajo del mapa</text></g>
+<g id="legs"></g><g id="pins"></g>
+</svg>
+<div class="zoom"><button id="zi" aria-label="Acercar">+</button><button id="zo" aria-label="Alejar">−</button><button id="zr" aria-label="Restablecer" style="font-size:15px">⟲</button></div>
+</div>
+<div class="legend"><span>Ida</span><span class="d">Vuelta al Origen</span><span class="r">Regreso al acceso</span><label class="f" for="mf">Cargar plano</label><input id="mf" type="file" accept="image/*"></div>
+<p class="note" id="mapnote">Plano oficial del Cementerio General (recorte desde la Puerta La Paz hasta Arriarán). Los hitos están sobre los números 63, 64, 48, 74 y 16 del plano. El trazado de las flechas es aproximado y está pendiente de confirmar en terreno.</p>
+
+<section class="card" id="card" aria-live="polite"></section>
+
+<details><summary>Recomendaciones de seguridad</summary><ul>
+<li>Usa calzado cómodo y cerrado: hay pasillos largos y desniveles.</li>
+<li>Lleva agua, gorro y protector solar; hay poca sombra.</li>
+<li>Camina por calles y pasillos; no pises ni te apoyes en sepulturas.</li>
+<li>Guarda silencio y respeta funerales y visitas de familiares. No fotografíes a personas en duelo.</li>
+<li>Evita llevar objetos de valor a la vista y recorre acompañado.</li>
+<li>Planifica terminar antes de que oscurezca y confirma el horario vigente en la administración.</li>
+<li>Mantén el volumen bajo o usa audífonos.</li>
+</ul></details>
+
+<details><summary>Compartir recorrido</summary>
+<p class="note">Escanea para abrir esta página en otro celular.</p><div id="qr"></div>
+<p class="note" id="lnk"></p></details>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+// ====== CONFIGURACIÓN ======
+// Para agregar audios o fotos reales, pega aquí las URL (o data:) de cada hito.
+var AUDIO=["", "audios/hito_2.m4a", "audios/hito_3.m4a", "", "audios/hito_5.m4a"];
+var PHOTOS=["imagenes/hito_1.jpg", "imagenes/hito_2.jpg", "imagenes/hito_3.jpg", "imagenes/hito_4.jpg", "imagenes/hito_5.jpg"];
+var PHOTO_GATE="imagenes/puerta.jpg";
+var MAP_SRC="imagenes/plano.jpg"; // plano original (se completa al incrustar la foto)
+// Calibración: píxeles del recorte del plano oficial (1072×839)
+var CROP={x:0,y:0,w:1072,h:839};
+function P(a){return [(a[0]-CROP.x)/CROP.w*1000,(a[1]-CROP.y)/CROP.h*783];}
+var ENTRY=[640,778];
+var H=[
+ {n:"Mausoleo Gótico Francisco Segundo Garín",t:260,tl:"4 min 20 s",from:"desde la entrada",sector:"Romero con Domeyko",id:63,pos:[605,372],pend:false,
+  ind:"Camina desde la entrada por la calle O’Higgins hasta la intersección de Romero con Domeyko. Mira hacia tu derecha: el mausoleo está en la esquina."},
+ {n:"Mausoleo Azteca Nazario Elguín",t:90,tl:"1 min 30 s",from:"desde el Gótico",sector:"Patio 28",id:64,pos:[619,272],pend:false,
+  ind:"Desde el Gótico, el Azteca se ve por detrás."},
+ {n:"Mausoleo Salvador Allende",t:30,tl:"30 s",from:"desde el Azteca",sector:"Dávila y O’Higgins",id:48,pos:[637,232],pend:false,
+  ind:"Está al frente del Azteca. Date la vuelta y encontrarás este mausoleo."},
+ {n:"Cristo Rico",t:45,tl:"45 s",from:"desde Salvador Allende",sector:"Arriarán y O’Higgins",id:74,pos:[643,149],pend:false,
+  ind:"Rodea el mausoleo de Salvador Allende por el lado izquierdo o derecho. Al final encontrarás a Cristo Rico."},
+ {n:"Origen del Cementerio",t:120,tl:"2 min",from:"desde Cristo Rico",sector:"Patio 27",id:16,pos:[660,477],pend:false,
+  ind:"Devuélvete y pasa otra vez por Salvador Allende. Camina derecho hasta encontrar unos nichos de color amarillo; avanza hasta la piedra que está al medio."}
+];
+// Rutas (píxeles de la foto) siguiendo calles según tus marcas; pendientes de confirmar
+var R=[
+ [ENTRY,[594,752],[594,606],[640,600],[640,398],H[0].pos],
+ [H[0].pos,[632,330],H[1].pos],
+ [H[1].pos,H[2].pos],
+ [H[2].pos,H[3].pos],
+ [H[3].pos,[655,190],[655,450],H[4].pos],
+ [H[4].pos,[646,500],[646,596],[602,612],[602,746],ENTRY]
+];
+// ====== ESTADO ======
+var cur=0,NS="http://www.w3.org/2000/svg";
+function $(i){return document.getElementById(i)}
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
+try{var s=parseInt(localStorage.getItem("rpa_stage"));if(s>=0&&s<7)cur=s}catch(e){}
+function fmt(s){return Math.floor(s/60)+" min"+(s%60?" "+s%60+" s":"")}
+// ====== MAPA ======
+function setMap(src){if(src){$("mi").setAttribute("href",src);$("ph").style.display="none"}}
+setMap(MAP_SRC);
+try{var sm=localStorage.getItem("rpa_map");if(sm&&!MAP_SRC)setMap(sm)}catch(e){}
+$("mf").onchange=function(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var c=document.createElement("canvas"),k=Math.min(1,1800/im.width);c.width=im.width*k;c.height=im.height*k;c.getContext("2d").drawImage(im,0,0,c.width,c.height);var d=c.toDataURL("image/jpeg",.85);setMap(d);try{localStorage.setItem("rpa_map",d)}catch(x){}};im.src=r.result};r.readAsDataURL(f)};
+var legs=$("legs"),pins=$("pins");
+R.forEach(function(r,i){var pts=r.map(P).map(function(p){return p.join(",")}).join(" ");
+ var l=el("polyline",{points:pts,fill:"none",stroke:i==5?"#17110f":"#8e2a40","stroke-width":6,"stroke-linejoin":"round","stroke-linecap":"round","marker-end":i==5?"url(#ar2)":"url(#ar)","stroke-dasharray":i==4?"4 12":(i==5?"1 13":"none"),id:"leg"+i},legs);});
+var es=P(ENTRY);var eg=el("g",{style:"cursor:pointer",tabindex:0,role:"button","aria-label":"Inicio: Puerta de Acceso La Paz"},pins);eg.addEventListener("click",function(){go(0)});el("circle",{cx:es[0],cy:es[1],r:14,fill:"#17110f",stroke:"#ece2cb","stroke-width":3},eg);
+var et=el("text",{x:es[0]+16,y:es[1]+6,"font-size":20,"font-weight":700,fill:"#17110f",stroke:"#ece2cb","stroke-width":4,"paint-order":"stroke","font-family":"Spectral,serif"},eg);et.textContent="Inicio y cierre";
+H.forEach(function(h,i){var p=P(h.pos);var g=el("g",{style:"cursor:pointer",id:"pin"+i,tabindex:0,role:"button","aria-label":"Hito "+(i+1)+": "+h.n},pins);
+ el("circle",{cx:p[0],cy:p[1],r:22,fill:"#6b1d2e",stroke:"#ece2cb","stroke-width":4,id:"pc"+i},g);
+ var t=el("text",{x:p[0],y:p[1]+8,"text-anchor":"middle","font-size":24,"font-weight":700,fill:"#f6efdd","font-family":"Spectral,serif"},g);t.textContent=i+1;
+ g.addEventListener("click",function(){go(i+1)});g.addEventListener("keydown",function(e){if(e.key=="Enter")go(i+1)});});
+// Zoom y desplazamiento
+var svg=$("map"),V={x:0,y:0,w:1000};
+function ap(){var h=V.w*.783;V.x=Math.max(0,Math.min(1000-V.w,V.x));V.y=Math.max(0,Math.min(783-h,V.y));svg.setAttribute("viewBox",V.x+" "+V.y+" "+V.w+" "+h)}
+function zoom(f,cx,cy){var nw=Math.max(200,Math.min(1000,V.w/f)),k=nw/V.w;V.x=cx-(cx-V.x)*k;V.y=cy-(cy-V.y)*k;V.w=nw;ap()}
+function pt(e){var r=svg.getBoundingClientRect();return [V.x+(e.clientX-r.left)/r.width*V.w,V.y+(e.clientY-r.top)/r.height*V.w*.783]}
+$("zi").onclick=function(){zoom(1.5,V.x+V.w/2,V.y+V.w*.39)};$("zo").onclick=function(){zoom(1/1.5,V.x+V.w/2,V.y+V.w*.39)};
+$("zr").onclick=function(){V={x:0,y:0,w:1000};ap()};
+svg.addEventListener("wheel",function(e){e.preventDefault();var p=pt(e);zoom(e.deltaY<0?1.2:1/1.2,p[0],p[1])},{passive:false});
+var ptr={},last=0,moved=0;
+svg.addEventListener("pointerdown",function(e){ptr[e.pointerId]=[e.clientX,e.clientY];moved=0});
+svg.addEventListener("pointermove",function(e){var o=ptr[e.pointerId];if(!o)return;var ids=Object.keys(ptr);
+ if(ids.length==2){var a=ptr[ids[0]],b=ptr[ids[1]];var d0=Math.hypot(a[0]-b[0],a[1]-b[1]);ptr[e.pointerId]=[e.clientX,e.clientY];var a2=ptr[ids[0]],b2=ptr[ids[1]];var d1=Math.hypot(a2[0]-b2[0],a2[1]-b2[1]);if(d0>0){var c=pt({clientX:(a2[0]+b2[0])/2,clientY:(a2[1]+b2[1])/2});zoom(d1/d0,c[0],c[1])}return}
+ var r=svg.getBoundingClientRect(),dx=(e.clientX-o[0])/r.width*V.w,dy=(e.clientY-o[1])/r.height*V.w*.783;moved+=Math.abs(dx)+Math.abs(dy);
+ V.x-=dx;V.y-=dy;ptr[e.pointerId]=[e.clientX,e.clientY];ap()});
+function up(e){delete ptr[e.pointerId]}
+svg.addEventListener("pointerup",up);svg.addEventListener("pointercancel",up);svg.addEventListener("pointerleave",up);
+// ====== ETAPAS: inicio · hitos 1-5 · regreso y cierre ======
+var AUDIO_START="",AUDIO_END="";
+var GU_START=["Bienvenidos a Relatos de piedra y almas, entre la Historia y el Mito en el Cementerio General.","Hoy los invitamos a descubrir un lugar donde cada monumento guarda una historia y cada rincón conserva recuerdos del pasado.","Durante este recorrido conocerán cinco estaciones que nos acercarán a la arquitectura, la memoria y las historias que forman parte de este cementerio.","Para comenzar, preparen sus audífonos, observen el entorno y sigan las indicaciones del mapa digital. Recuerden caminar con precaución y mantener una actitud respetuosa, ya que nos encontramos en un lugar de memoria y descanso.","Nuestra primera parada será el Mausoleo Gótico. ¿Están preparados para descubrir las historias que se esconden entre estas calles?"];
+var GU_END=["Cada paso que hemos dado nos ha permitido descubrir que el Cementerio General es mucho más que un lugar de descanso.","Entre mausoleos, monumentos y antiguas calles, encontramos historias que nos hablan de distintas épocas, creencias y personas que dejaron su huella.","Ahora los invitamos a regresar hacia la Puerta de Acceso La Paz, donde comenzó nuestra experiencia.","Mientras recorren este último tramo, los invitamos a pensar en cuál de las historias escuchadas dejó una mayor impresión en ustedes.","Gracias por acompañarnos en Relatos de piedra y almas, entre la Historia y el Mito en el Cementerio General.","Porque mientras existan personas dispuestas a escuchar y recordar, estas historias seguirán vivas."];
+var fin=false,atDoor=false;
+try{fin=localStorage.getItem("rpa_fin")=="1";atDoor=localStorage.getItem("rpa_door")=="1"}catch(e){}
+function save(){try{localStorage.setItem("rpa_stage",cur);localStorage.setItem("rpa_fin",fin?"1":"0");localStorage.setItem("rpa_door",atDoor?"1":"0")}catch(e){}}
+function stagePos(s){return P(s==0||s==6?ENTRY:H[s-1].pos)}
+function go(s){cur=s;save();render();if(V.w<1000){var p=stagePos(s);V.x=p[0]-V.w/2;V.y=p[1]-V.w*.39;ap()}}
+function gate(){return '<div class="photo">'+(PHOTO_GATE?'<img alt="Puerta de Acceso La Paz" src="'+PHOTO_GATE+'">':"Fotografía pendiente")+'</div>'}
+function aud(src){return '<audio id="au" controls preload="none" '+(src?'src="'+src+'"':"")+'></audio><label class="f" for="af">'+(src?"Cambiar grabación temporalmente":"Audio aún no incorporado: seleccionar grabación")+'</label><input id="af" type="file" accept="audio/*">'}
+function guion(a,who){return '<details><summary>Guion narrativo</summary><p class="note"><em>'+who+'</em></p>'+a.map(function(t){return '<p>'+t+'</p>'}).join("")+'</details>'}
+function render(){var s=cur,hi=s-1,done=0,tot=0;
+ H.forEach(function(x,i){tot+=x.t;if(i<=hi)done+=x.t});
+ $("pb").style.width=(fin?100:s/7*100)+"%";
+ $("pt").textContent=fin?"Experiencia finalizada":(s==0?"Inicio · Puerta de Acceso La Paz":(s==6?"Regreso y cierre":"Hito "+s+" de 5"));
+ $("pm").textContent=fmt(done)+" de "+fmt(tot)+" hasta el Hito 5"+(s==6?" · regreso por medir":"");
+ H.forEach(function(x,i){var c=$("pc"+i);c.setAttribute("fill",i<hi?"#17110f":"#6b1d2e");c.setAttribute("r",i==hi?30:22);c.setAttribute("stroke",i==hi?"#d9a441":"#ece2cb")});
+ var act=Math.max(s-1,0);R.forEach(function(r,i){$("leg"+i).setAttribute("opacity",i==act?1:(i<act?.5:.25))});
+ var h=H[hi],c=$("card"),t="";
+ if(s==0){t='<h2>Puerta de Acceso La Paz</h2><div class="chips"><span class="chip">Inicio del recorrido</span><span class="chip">Av. Profesor Alberto Zañartu</span></div>'
+  +'<p><strong>Relatos de piedra y almas</strong>, entre la Historia y el Mito en el Cementerio General. Cinco estaciones sobre arquitectura, memoria e historias del cementerio, que recorrerás a pie con ayuda del plano y de una guía de audio.</p>'
+  +gate()+guion(GU_START,"Narrador · voz misteriosa, pausada y acogedora")+aud(AUDIO_START)
+  +'<h2 style="font-size:21px;margin-top:14px">Cómo llegar al Hito 1</h2><p>Desde la Puerta de Acceso La Paz, avanza por el sector de la entrada hacia el interior del cementerio. Sigue las indicaciones del plano original hasta el sector Romero con Domeyko, donde se encuentra el Mausoleo Gótico.</p><div class="chips"><span class="chip">4 min 20 s hasta el Hito 1</span><span class="chip pend">Trazado por confirmar</span></div>'
+  +'<div class="nav"><button class="b" id="nx">Comenzar recorrido</button></div>';}
+ else if(s<=5){var ph=PHOTOS[hi]?'<img alt="'+h.n+'" style="object-position:center '+(hi==3?'12%':'50%')+'" src="'+PHOTOS[hi]+'">':"Fotografía pendiente<br>(se agregará con material propio)";
+  t='<h2>'+s+'. '+h.n+'</h2><div class="chips"><span class="chip">'+h.tl+' '+h.from+'</span><span class="chip">'+h.sector+'</span><span class="chip">N.º '+h.id+' en el plano</span>'+(h.pend?'<span class="chip pend">Ubicación por confirmar</span>':"")+'</div>'
+  +'<p>'+h.ind+'</p><div class="photo">'+ph+'</div>'+aud(AUDIO[hi])
+  +'<div class="nav"><button class="b o" id="pv">Anterior</button><button class="b" id="nx">Siguiente</button></div>';}
+ else if(fin){t='<h2>Experiencia finalizada</h2><p>Llegaste nuevamente a la Puerta de Acceso La Paz. Gracias por acompañarnos en <strong>Relatos de piedra y almas</strong>.</p><div class="nav"><button class="b o" id="rs">Volver al inicio</button></div>';}
+ else{t='<h2>Regreso al acceso y cierre</h2><div class="chips"><span class="chip">Etapa de cierre · no es un hito</span><span class="chip pend">Tiempo de regreso: pendiente de medición</span></div>'
+  +'<p>Desde el Patio 27, vuelve hacia la Puerta de Acceso La Paz siguiendo la línea punteada oscura del plano, por los caminos del cementerio. La ruta de regreso está pendiente de confirmar en terreno.</p>'
+  +gate()+guion(GU_END,"Narrador · voz tranquila, reflexiva y emotiva")+aud(AUDIO_END)
+  +'<div class="nav"><button class="b o" id="dr">'+(atDoor?"Estoy en la Puerta ✓":"Ya estoy en la Puerta La Paz")+'</button></div>'
+  +'<p class="note">La experiencia termina cuando llegues otra vez a la Puerta de Acceso La Paz.</p>'
+  +'<div class="nav"><button class="b o" id="pv">Anterior</button><button class="b" id="fn" '+(atDoor?"":"disabled")+'>Finalizar experiencia</button></div>';}
+ c.innerHTML=t;
+ var b;if(b=$("pv"))b.onclick=function(){go(cur-1)};if(b=$("nx"))b.onclick=function(){go(cur+1)};
+ if(b=$("dr"))b.onclick=function(){atDoor=!atDoor;save();render()};
+ if(b=$("fn"))b.onclick=function(){fin=true;save();render()};
+ if(b=$("rs"))b.onclick=function(){fin=false;atDoor=false;go(0)};
+ if(b=$("af"))b.onchange=function(e){var f=e.target.files[0];if(f){$("au").src=URL.createObjectURL(f);$("au").play().catch(function(){})}};}
+render();
+// QR
+$("lnk").textContent=location.href;
+try{var q=qrcode(0,"M");q.addData(location.href);q.make();$("qr").innerHTML=q.createImgTag(5)}catch(e){$("qr").style.display="none"}
+</script></body></html>
