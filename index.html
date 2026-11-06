@@ -191,6 +191,22 @@ function render(){var s=cur,hi=s-1,done=0,tot=0;
  if(b=$("rs"))b.onclick=function(){fin=false;atDoor=false;go(0)};
  if(b=$("af"))b.onchange=function(e){var f=e.target.files[0];if(f){$("au").src=URL.createObjectURL(f);$("au").play().catch(function(){})}};}
 render();
+ const encuesta = document.createElement("a");
+encuesta.href = "https://forms.gle/DZnRPANfPsyofrhY7";
+encuesta.target = "_blank";
+encuesta.rel = "noopener noreferrer";
+encuesta.textContent = "📝 Responder encuesta de satisfacción";
+encuesta.style.cssText = "display:inline-block;background:#6b4f3b;color:white;padding:14px 20px;border-radius:12px;text-decoration:none;font-weight:bold;margin-top:15px;";
+
+const renderOriginal = render;
+render = function() {
+  renderOriginal();
+  const pantalla = document.getElementById("card");
+  if (pantalla && cur === 6) {
+    pantalla.appendChild(encuesta);
+  }
+};
+render();
 // QR
 $("lnk").textContent=location.href;
 try{var q=qrcode(0,"M");q.addData(location.href);q.make();$("qr").innerHTML=q.createImgTag(5)}catch(e){$("qr").style.display="none"}
